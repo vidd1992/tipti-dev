@@ -8,6 +8,9 @@ pipeline {
     //     // Define la variable para la ejecución de SonarQube Scanner
     //     SONARQUBE_SCANNER_HOME = tool 'SonarQube Scanner'
     // }
+    environment {
+        HEROKU_API_KEY = credentials('HEROKU_API_KEY')
+    }
 
     stages {
         stage('Checkout') {
@@ -42,16 +45,28 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        // stage('Deploy') {
+        //     steps {
+        //     script {
+        //             def dockerHome = tool 'docker'
+        //             def app = docker.build("miapp/hola-mundo:${env.BUILD_ID}")
+        //             docker.image("miapp/hola-mundo:${env.BUILD_ID}").run("-p 80:5000")
+        //         }
+        //     }
+
+        //     }
+        stage('Deploy to Heroku') {
             steps {
-            script {
-                    def dockerHome = tool 'docker'
-                    def app = docker.build("miapp/hola-mundo:${env.BUILD_ID}")
-                    docker.image("miapp/hola-mundo:${env.BUILD_ID}").run("-p 80:5000")
+                script {
+                    // Login to Heroku
+                    sh 'heroku login -i'
+                    // Add remote repository if not already added
+                    sh 'git remote | grep heroku || heroku git:remote -a nombre-de-tu-app'
+                    // Push to Heroku
+                    sh 'git push heroku master'
                 }
             }
-
-            }
+        }
         }
     }
 
