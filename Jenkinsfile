@@ -49,8 +49,6 @@ pipeline {
                     def app = docker.build("miapp/hola-mundo:${env.BUILD_ID}")
                     docker.image("miapp/hola-mundo:${env.BUILD_ID}").run("-p 80:5000")
                 }
-
-
             }
 
             }
@@ -65,4 +63,4 @@ pipeline {
             echo 'Pipeline failed.'
         }
     }
-}
+
