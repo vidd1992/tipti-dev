@@ -8,9 +8,9 @@ pipeline {
     //     // Define la variable para la ejecución de SonarQube Scanner
     //     SONARQUBE_SCANNER_HOME = tool 'SonarQube Scanner'
     // }
-    environment {
-        HEROKU_API_KEY = credentials('HEROKU_API_KEY')
-    }
+    // environment {
+    //     HEROKU_API_KEY = credentials('HEROKU_API_KEY')
+    // }
 
     stages {
         stage('Checkout') {
