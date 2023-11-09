@@ -44,13 +44,17 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                    script {
-                            echo 'Creating deploy...'
-                            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                            def app = docker.build("my-app:${env.BUILD_ID}")
-                            app.push()
-                            }
-                    }
+                        echo 'Deploying...'
+                        echo 'Building Docker image...'
+                        // Reemplaza 'my-app' con el nombre de tu imagen y 'tag' con el tag de tu imagen
+                        sh 'docker build -t my-app:tag .'
+
+                        echo 'Logging into Docker Hub...'
+                        // Utiliza con precaución, es mejor usar con credenciales almacenadas en Jenkins
+                        sh 'echo $DOCKERHUB_PASS | docker login --username $DOCKERHUB_USER --password-stdin'
+
+                        echo 'Pushing image to Docker Hub...'
+                        sh 'docker push my-app:tag'
             }
         }
     }
