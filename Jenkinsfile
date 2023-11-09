@@ -4,7 +4,10 @@ pipeline {
     // tools {
     //     python 'Python-3.8'
     // }
-
+    environment {
+        // Define la variable para la ejecución de SonarQube Scanner
+        SONARQUBE_SCANNER_HOME = tool 'SonarQube Scanner'
+    }
 
     stages {
         stage('Checkout') {
@@ -21,12 +24,11 @@ pipeline {
         }
 
         stage('Code Analysis') {
-             def scannerHome = tool 'SonarScanner 4.0';
             steps {
                 echo 'Analyzing code...'
                 script {
                    withSonarQubeEnv('SonarCloud') {
-                        sh "${scannerHome}/bin/sonar-scanner"
+                        sh "${env.SONARQUBE_SCANNER_HOME}/bin/sonar-scanner"
                     }
                 }
             }
