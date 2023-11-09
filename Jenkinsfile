@@ -45,26 +45,28 @@ pipeline {
             }
         }
 
-        // stage('Deploy') {
-        //     steps {
-        //     script {
-        //             def dockerHome = tool 'docker'
-        //             def app = docker.build("miapp/hola-mundo:${env.BUILD_ID}")
-        //             docker.image("miapp/hola-mundo:${env.BUILD_ID}").run("-p 80:5000")
-        //         }
-        //     }
+        stage('Deploy docker') {
+            steps {
+                  echo 'Deploy docker'
+            // script {
+            //         def dockerHome = tool 'docker'
+            //         def app = docker.build("vidd1992/tiptidev:${env.BUILD_ID}")
+            //         docker.image("vidd1992/tiptidev:${env.BUILD_ID}").run("-p 80:5000")
+            //     }
+            }
 
-        //     }
+            }
         stage('Deploy to Heroku') {
             steps {
-                script {
-                    // Login to Heroku
-                    sh 'heroku login -i'
-                    // Add remote repository if not already added
-                    sh 'git remote | grep heroku || heroku git:remote -a nombre-de-tu-app'
-                    // Push to Heroku
-                    sh 'git push heroku master'
-                }
+                      echo 'Deploy Heroku'
+                // script {
+                //     // Login to Heroku
+                //     sh 'heroku login -i'
+                //     // Add remote repository if not already added
+                //     sh 'git remote | grep heroku || heroku git:remote -a nombre-de-tu-app'
+                //     // Push to Heroku
+                //     sh 'git push heroku master'
+                // }
             }
         }
         }
