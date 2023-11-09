@@ -45,10 +45,9 @@ pipeline {
         stage('Deploy') {
             steps {
             script {
-            def dockerHome = tool 'docker'
-            withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://registry.hub.docker.com']) {
-                sh "${dockerHome}/bin/docker build -t vidd1992/tipti-dev ."
-                sh "${dockerHome}/bin/docker push vidd1992/tipti-dev"
+                    def dockerHome = tool 'docker'
+                    def app = docker.build("miapp/hola-mundo:${env.BUILD_ID}")
+                    docker.image("miapp/hola-mundo:${env.BUILD_ID}").run("-p 80:5000")
                 }
 
 
