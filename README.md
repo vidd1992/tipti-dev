@@ -46,7 +46,7 @@ Aquí hay algunas imágenes que muestran el pipeline de Jenkins en acción y los
 
 Se adjunta el registro de construcción de Jenkins para referencia detallada del proceso de CI/CD.
 
-`[Adjunta el archivo de log aquí o proporciona un enlace para su descarga]`
+,
 
 ---
 
