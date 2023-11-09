@@ -44,6 +44,8 @@ pipeline {
 
         stage('Deploy') {
             steps {
+            def dockerHome = tool 'docker'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
                         echo 'Deploying...'
                         echo 'Building Docker image...'
                         // Reemplaza 'my-app' con el nombre de tu imagen y 'tag' con el tag de tu imagen
