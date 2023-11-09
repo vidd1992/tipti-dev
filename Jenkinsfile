@@ -5,6 +5,7 @@ pipeline {
     //     python 'Python-3.8'
     // }
 
+
     stages {
         stage('Checkout') {
             steps {
@@ -19,14 +20,17 @@ pipeline {
             }
         }
 
-        // stage('Code Analysis') {
-        //     steps {
-        //         echo 'Analyzing code...'
-        //         script {
-        //           //  sh 'sonar-scanner'
-        //         }
-        //     }
-        // }
+        stage('Code Analysis') {
+             def scannerHome = tool 'SonarScanner 4.0';
+            steps {
+                echo 'Analyzing code...'
+                script {
+                   withSonarQubeEnv('SonarCloud') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
+            }
+        }
 
         stage('Backup') {
             steps {
