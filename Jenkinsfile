@@ -19,14 +19,14 @@ pipeline {
             }
         }
 
-        stage('Code Analysis') {
-            steps {
-                echo 'Analyzing code...'
-                script {
-                  //  sh 'sonar-scanner'
-                }
-            }
-        }
+        // stage('Code Analysis') {
+        //     steps {
+        //         echo 'Analyzing code...'
+        //         script {
+        //           //  sh 'sonar-scanner'
+        //         }
+        //     }
+        // }
 
         stage('Backup') {
             steps {
