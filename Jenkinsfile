@@ -44,10 +44,12 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                         echo 'Creating deploy...'
-                        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        def app = docker.build("my-app:${env.BUILD_ID}")
-                        app.push()
+                    script {
+                            echo 'Creating deploy...'
+                            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                            def app = docker.build("my-app:${env.BUILD_ID}")
+                            app.push()
+                            }
                     }
             }
         }
