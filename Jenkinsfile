@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    tools {
-        python 'Python-3.8'
-    }
+    // tools {
+    //     python 'Python-3.8'
+    // }
 
     stages {
         stage('Checkout') {
@@ -15,7 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh 'python app.py > build_output.txt'
+                sh 'python3 app.py > build_output.txt'
             }
         }
 
