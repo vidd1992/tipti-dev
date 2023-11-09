@@ -44,7 +44,17 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'Deploying...'
+                        echo 'Deploying...'
+                        echo 'Building Docker image...'
+                        // Reemplaza 'my-app' con el nombre de tu imagen y 'tag' con el tag de tu imagen
+                        sh 'docker build -t my-app:tag .'
+
+                        echo 'Logging into Docker Hub...'
+                        // Utiliza con precaución, es mejor usar con credenciales almacenadas en Jenkins
+                        sh 'echo $DOCKERHUB_PASS | docker login --username $DOCKERHUB_USER --password-stdin'
+
+                        echo 'Pushing image to Docker Hub...'
+                        sh 'docker push my-app:tag'
             }
         }
     }
